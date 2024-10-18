@@ -67,6 +67,25 @@ module.exports = {
         }
       }
     },
+    compatible: {
+      // **** 自定义兼容配置 **** //
+      // connect阶段所需的兼容性配置
+      connect: {
+        // 参考配置（无path）
+        // 'xxx.xxx.xxx.xxx:443': {
+        //   ssl: false
+        // }
+      },
+      // request阶段所需的兼容性配置
+      request: {
+        // 参考配置（配置方式同 `拦截配置`）
+        // 'xxx.xxx.xxx.xxx:443': {
+        //   '.*': {
+        //     rejectUnauthorized: false
+        //   }
+        // }
+      }
+    },
     intercept: {
       enabled: true
     },
@@ -264,13 +283,6 @@ module.exports = {
           abort: true,
           desc: '广告拦截'
         }
-      },
-      '*': {
-        '^.*\\?DS_DOWNLOAD$': {
-          requestReplace: { doDownload: true },
-          responseReplace: { doDownload: true },
-          desc: '下载请求拦截：移除请求地址中的 `?DS_DOWNLOAD`，并设置响应头 `Content-Disposition: attachment; filename=xxxx`，使浏览器强制执行下载逻辑，而不是在浏览器中浏览。'
-        }
       }
     },
     // 预设置IP列表
@@ -346,9 +358,6 @@ module.exports = {
       '*.qq.com': true,
       '*.baidu.com': true,
       '192.168.*': true
-    },
-    sniList: {
-    //   'github.com': 'abaidu.com'
     },
     dns: {
       providers: {
